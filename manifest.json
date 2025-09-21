@@ -1,0 +1,26 @@
+{
+  "name": "Puzzle Hub - Multi-Game Collection",
+  "short_name": "Puzzle Hub",
+  "description": "Collection of puzzle games including Sudoku, Word Search, Sliding Puzzle, Math Quiz, and Crossword",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#4a90e2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["games", "entertainment", "puzzle"],
+  "lang": "en"
+}

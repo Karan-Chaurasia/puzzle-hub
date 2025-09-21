@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Hub - Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .pass { background: #d4edda; border-color: #c3e6cb; }
+        .fail { background: #f8d7da; border-color: #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>Puzzle Hub - File Structure Test</h1>
+    <div id="test-results"></div>
+    
+    <script>
+        const requiredFiles = [
+            'index.html',
+            'css/styles.css',
+            'js/app.js',
+            'js/gameManager.js',
+            'js/storage.js',
+            'games/sudoku.js',
+            'games/wordsearch.js',
+            'games/sliding.js',
+            'games/mathquiz.js',
+            'games/crossword.js'
+        ];
+        
+        const testResults = document.getElementById('test-results');
+        
+        async function testFile(file) {
+            try {
+                const response = await fetch(file);
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
+        }
+        
+        async function runTests() {
+            testResults.innerHTML = '<p>Testing file structure...</p>';
+            
+            for (const file of requiredFiles) {
+                const exists = await testFile(file);
+                const div = document.createElement('div');
+                div.className = `test-item ${exists ? 'pass' : 'fail'}`;
+                div.textContent = `${file}: ${exists ? 'FOUND' : 'MISSING'}`;
+                testResults.appendChild(div);
+            }
+            
+            // Test localStorage
+            const storageDiv = document.createElement('div');
+            storageDiv.className = 'test-item';
+            try {
+                localStorage.setItem('test', 'value');
+                localStorage.removeItem('test');
+                storageDiv.className += ' pass';
+                storageDiv.textContent = 'localStorage: WORKING';
+            } catch (error) {
+                storageDiv.className += ' fail';
+                storageDiv.textContent = 'localStorage: NOT WORKING';
+            }
+            testResults.appendChild(storageDiv);
+            
+            const summary = document.createElement('div');
+            summary.style.marginTop = '20px';
+            summary.innerHTML = `
+                <h3>Test Complete</h3>
+                <p>If all files show "FOUND" and localStorage is "WORKING", your Puzzle Hub is ready for deployment!</p>
+                <p><a href="index.html">Launch Puzzle Hub</a></p>
+            `;
+            testResults.appendChild(summary);
+        }
+        
+        runTests();
+    </script>
+</body>
+</html>

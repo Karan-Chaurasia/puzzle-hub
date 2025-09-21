@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Hub</title>
+    <meta name="description" content="Collection of puzzle games including Sudoku, Word Search, Sliding Puzzle, Math Quiz, and Crossword">
+    <meta name="theme-color" content="#4a90e2">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧩 Puzzle Hub</h1>
+            <button id="theme-toggle" class="theme-btn">🌙</button>
+        </header>
+        
+        <main id="main-content">
+            <div id="menu-screen" class="screen active">
+                <div class="menu-tabs">
+                    <button class="tab-btn active" data-tab="single">Single Player</button>
+                    <button class="tab-btn" data-tab="multi">Multiplayer</button>
+                </div>
+                <div id="single-tab" class="tab-content active">
+                    <div class="game-grid">
+                    <div class="game-card" data-game="sudoku">
+                        <div class="game-icon">🔢</div>
+                        <h3>Sudoku</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">4×4</span>
+                            <span class="badge medium locked" data-level="medium">6×6</span>
+                            <span class="badge hard locked" data-level="hard">9×9</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="wordsearch">
+                        <div class="game-icon">🔍</div>
+                        <h3>Word Search</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">5×5</span>
+                            <span class="badge medium locked" data-level="medium">8×8</span>
+                            <span class="badge hard locked" data-level="hard">12×12</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="sliding">
+                        <div class="game-icon">🧩</div>
+                        <h3>Sliding Puzzle</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">3×3</span>
+                            <span class="badge medium locked" data-level="medium">4×4</span>
+                            <span class="badge hard locked" data-level="hard">5×5</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="mathquiz">
+                        <div class="game-icon">➕</div>
+                        <h3>Math Quiz</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">Basic</span>
+                            <span class="badge medium locked" data-level="medium">×÷</span>
+                            <span class="badge hard locked" data-level="hard">Timed</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="crossword">
+                        <div class="game-icon">📝</div>
+                        <h3>Crossword</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">Small</span>
+                            <span class="badge medium locked" data-level="medium">Medium</span>
+                            <span class="badge hard locked" data-level="hard">Large</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="tictactoe">
+                        <div class="game-icon">⭕</div>
+                        <h3>Tic Tac Toe</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">Easy AI</span>
+                            <span class="badge medium locked" data-level="medium">Smart AI</span>
+                            <span class="badge hard locked" data-level="hard">Expert AI</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="memory">
+                        <div class="game-icon">🃏</div>
+                        <h3>Memory Match</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">4×4</span>
+                            <span class="badge medium locked" data-level="medium">6×6</span>
+                            <span class="badge hard locked" data-level="hard">8×8</span>
+                        </div>
+                    </div>
+                    <div class="game-card" data-game="snake">
+                        <div class="game-icon">🐍</div>
+                        <h3>Snake</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">Slow</span>
+                            <span class="badge medium locked" data-level="medium">Fast</span>
+                            <span class="badge hard locked" data-level="hard">Turbo</span>
+                        </div>
+                    </div>
+
+                    <div class="game-card" data-game="minesweeper">
+                        <div class="game-icon">💣</div>
+                        <h3>Minesweeper</h3>
+                        <div class="difficulty-badges">
+                            <span class="badge easy unlocked" data-level="easy">8×8</span>
+                            <span class="badge medium locked" data-level="medium">12×12</span>
+                            <span class="badge hard locked" data-level="hard">16×16</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <div id="multi-tab" class="tab-content">
+                    <div class="game-grid">
+                        <div class="game-card" data-game="mp-tictactoe">
+                            <div class="game-icon">⭕</div>
+                            <h3>Tic Tac Toe</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">3×3</span>
+                                <span class="badge medium unlocked" data-level="medium">4×4</span>
+                                <span class="badge hard unlocked" data-level="hard">5×5</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="mp-memory">
+                            <div class="game-icon">🃏</div>
+                            <h3>Memory Match</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">4×4</span>
+                                <span class="badge medium unlocked" data-level="medium">6×6</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="connect4">
+                            <div class="game-icon">🔴</div>
+                            <h3>Connect Four</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">7×6</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="checkers">
+                            <div class="game-icon">⚫</div>
+                            <h3>Checkers</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">8×8</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="dots">
+                            <div class="game-icon">⚪</div>
+                            <h3>Dots & Boxes</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">4×4</span>
+                                <span class="badge medium unlocked" data-level="medium">6×6</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="rps">
+                            <div class="game-icon">✂️</div>
+                            <h3>Rock Paper Scissors</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">Best of 5</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="mp-snake">
+                            <div class="game-icon">🐍</div>
+                            <h3>Two Player Snake</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">Split</span>
+                            </div>
+                        </div>
+                        <div class="game-card" data-game="pong">
+                            <div class="game-icon">🏓</div>
+                            <h3>Pong</h3>
+                            <div class="difficulty-badges">
+                                <span class="badge easy unlocked" data-level="easy">Classic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="game-screen" class="screen">
+                <div class="game-header">
+                    <button id="back-btn" class="btn">← Back</button>
+                    <h2 id="game-title"></h2>
+                    <div id="game-score">Score: <span>0</span></div>
+                </div>
+                <div id="game-container"></div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/storage.js"></script>
+    <script src="js/gameManager.js"></script>
+    <script src="games/sudoku.js"></script>
+    <script src="games/wordsearch.js"></script>
+    <script src="games/sliding.js"></script>
+    <script src="games/mathquiz.js"></script>
+    <script src="games/crossword.js"></script>
+    <script src="games/tictactoe.js"></script>
+    <script src="games/memory.js"></script>
+    <script src="games/snake.js"></script>
+
+    <script src="games/minesweeper.js"></script>
+    <script src="multiplayer/mp-tictactoe.js"></script>
+    <script src="multiplayer/mp-memory.js"></script>
+    <script src="multiplayer/connect4.js"></script>
+    <script src="multiplayer/checkers.js"></script>
+    <script src="multiplayer/dots.js"></script>
+    <script src="multiplayer/rps.js"></script>
+    <script src="multiplayer/mp-snake.js"></script>
+    <script src="multiplayer/pong.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
