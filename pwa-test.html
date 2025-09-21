@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Test - Puzzle Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .pass { background: #d4edda; border-color: #c3e6cb; }
+        .fail { background: #f8d7da; border-color: #f5c6cb; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>PWA Readiness Test - Puzzle Hub</h1>
+    <div id="test-results"></div>
+    
+    <script>
+        const testResults = document.getElementById('test-results');
+        
+        async function testPWAFeatures() {
+            const tests = [];
+            
+            // Test HTTPS
+            tests.push({
+                name: 'HTTPS Connection',
+                result: location.protocol === 'https:' || location.hostname === 'localhost',
+                message: location.protocol === 'https:' ? 'Secure connection' : 'HTTP detected (PWA requires HTTPS in production)'
+            });
+            
+            // Test Service Worker support
+            tests.push({
+                name: 'Service Worker Support',
+                result: 'serviceWorker' in navigator,
+                message: 'serviceWorker' in navigator ? 'Browser supports Service Workers' : 'Service Workers not supported'
+            });
+            
+            // Test Manifest
+            try {
+                const manifestResponse = await fetch('./manifest.json');
+                tests.push({
+                    name: 'Manifest File',
+                    result: manifestResponse.ok,
+                    message: manifestResponse.ok ? 'manifest.json found and accessible' : 'manifest.json not found'
+                });
+            } catch (error) {
+                tests.push({
+                    name: 'Manifest File',
+                    result: false,
+                    message: 'Error loading manifest.json'
+                });
+            }
+            
+            // Test Service Worker file
+            try {
+                const swResponse = await fetch('./service-worker.js');
+                tests.push({
+                    name: 'Service Worker File',
+                    result: swResponse.ok,
+                    message: swResponse.ok ? 'service-worker.js found and accessible' : 'service-worker.js not found'
+                });
+            } catch (error) {
+                tests.push({
+                    name: 'Service Worker File',
+                    result: false,
+                    message: 'Error loading service-worker.js'
+                });
+            }
+            
+            // Test Icons
+            const iconTests = ['./icons/icon-192x192.png', './icons/icon-512x512.png'];
+            for (const icon of iconTests) {
+                try {
+                    const iconResponse = await fetch(icon);
+                    tests.push({
+                        name: `Icon ${icon.split('/').pop()}`,
+                        result: iconResponse.ok,
+                        message: iconResponse.ok ? 'Icon file found' : 'Icon file missing - create using create-icons.html'
+                    });
+                } catch (error) {
+                    tests.push({
+                        name: `Icon ${icon.split('/').pop()}`,
+                        result: false,
+                        message: 'Icon file missing - create using create-icons.html'
+                    });
+                }
+            }
+            
+            // Test Install Prompt
+            tests.push({
+                name: 'Install Prompt Support',
+                result: 'BeforeInstallPromptEvent' in window || /iPhone|iPad|iPod/.test(navigator.userAgent),
+                message: 'Browser supports app installation'
+            });
+            
+            // Display results
+            testResults.innerHTML = '';
+            tests.forEach(test => {
+                const div = document.createElement('div');
+                div.className = `test-item ${test.result ? 'pass' : 'fail'}`;
+                div.innerHTML = `<strong>${test.name}:</strong> ${test.message}`;
+                testResults.appendChild(div);
+            });
+            
+            // Summary
+            const passedTests = tests.filter(t => t.result).length;
+            const summary = document.createElement('div');
+            summary.style.marginTop = '20px';
+            summary.innerHTML = `
+                <h3>PWA Readiness: ${passedTests}/${tests.length} tests passed</h3>
+                <p><strong>Next Steps:</strong></p>
+                <ul>
+                    <li>Create app icons using <a href="create-icons.html">create-icons.html</a></li>
+                    <li>Deploy to HTTPS server (GitHub Pages provides this)</li>
+                    <li>Test installation on mobile and desktop devices</li>
+                    <li><a href="index.html">Launch Puzzle Hub PWA</a></li>
+                </ul>
+            `;
+            testResults.appendChild(summary);
+        }
+        
+        testPWAFeatures();
+    </script>
+</body>
+</html>
